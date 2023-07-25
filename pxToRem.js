@@ -42,7 +42,8 @@ console.log(finalStr);
 
 // не работает, если ошибочное px было ДО
 let str = "font: 400px 1600px 'Montserrat', sans-serif;"
-
+element = document.querySelector('.beforeInPX');
+element.innerHTML = str;
 
 while (str.includes('px')) {
 
@@ -100,6 +101,9 @@ console.log(finalRem);
 
 str = str.slice(0, str.indexOf(nextStr)) + finalRem + str.slice(str.indexOf(nextStr)+finalRem.length);
 console.log('final === ', str);
+
+element = document.querySelector('.selector');
+element.innerHTML = str;
 
 }
 
