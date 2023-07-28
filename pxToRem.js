@@ -49,75 +49,92 @@ let str = ""
 const submitBtn = document.getElementById('save');
 submitBtn.onclick = function () {
     str = document.getElementById('BeforeStr').value;
+    console.log(str)
     element = document.querySelector('.beforeInPX');
     element.innerHTML = str;
 
-    if (!str.includes('px')) {
+    console.log(str)
+    if (!str.toLowerCase().includes('px')) {
         element = document.querySelector('.selector');
-        element.innerHTML = str;
+        element.innerHTML = 'Не содержит px';
+    } else {
+        let arr = [];
+        let str1 = str.split('\n');
+        console.log(str1)
+        
+        str1.forEach(element => converteToREM(element))
+        function converteToREM(str) {
+            while (str.includes('px')) {
+                
+                if (!isNaN(str[str.search('px')-1])) {
+                    console.log('fine');
+                } else {
+                    console.log('error');
+                    break;
+                }
+                console.log(str.includes('px'));
+                console.log(str.search('px')); 
+                
+                // ' '... = [?]
+                //px = [12] // p = [12], x [] = p [] + 1, x [] = [13]
+                // ...' ' = [12+2]
+                
+                let nextStr = str;
+                console.log('str = ' + nextStr);
+                
+                // убираю с конца до px
+                while (nextStr[nextStr.length-2]+nextStr[nextStr.length-1] !== 'px') {
+                
+                    // console.log(nextStr[nextStr.length-2]+nextStr[nextStr.length-1]);
+                    // console.log(nextStr.length)
+                    // console.log(!nextStr.includes(' '))
+                    
+                    nextStr = nextStr.slice(0, nextStr.lastIndexOf(' '));
+                    console.log('nextStr = ' + nextStr);
+                    if (nextStr.length === 0 || !nextStr.includes(' '))  {
+                        break;
+                    }
+                }
+            
+                // убираю начало до последнего пробела, если найден px
+                if (nextStr[nextStr.length-2]+nextStr[nextStr.length-1] === 'px') {
+                    nextStr = nextStr.slice(nextStr.lastIndexOf(' ')+1, nextStr.length);
+                    console.log(nextStr);
+                }
+                
+                console.log(str.indexOf(nextStr)); // поиск значения в px в изначальной строке
+                
+                let beforePx = nextStr.slice(0, nextStr.indexOf('px'));
+                
+                //убрали px и превратили в число
+                beforePx = Number(beforePx);
+                console.log(beforePx);
+                
+                
+                let rem = 0.0625;
+                let afterRem = rem * beforePx;
+                console.log(afterRem);
+                
+                let finalRem = afterRem + 'rem';
+                console.log(finalRem);
+                
+                str = str.slice(0, str.indexOf(nextStr)) + finalRem + str.slice(str.indexOf(nextStr)+finalRem.length);
+                console.log('final === ', str);
+                
+                // element2 = document.querySelector('.selector');
+                // element2.innerHTML = str;
+                
+            }
+            return arr.push(str);
+        }
+        
+        
+        console.log(`All strings: ${str1}  `) //начальное значение
+        console.log(`All strings: ${arr}  `) // 
+        
+        
     }
 
-    while (str.includes('px')) {
-
-        if (!isNaN(str[str.search('px')-1])) {
-            console.log('fine');
-        } else {
-            console.log('error');
-            break;
-        }
-        console.log(str.includes('px'));
-        console.log(str.search('px')); 
-        
-        // ' '... = [?]
-        //px = [12] // p = [12], x [] = p [] + 1, x [] = [13]
-        // ...' ' = [12+2]
-        
-        let nextStr = str;
-        console.log('str = ' + nextStr);
-        
-        // убираю с конца до px
-        while (nextStr[nextStr.length-2]+nextStr[nextStr.length-1] !== 'px') {
-        
-            // console.log(nextStr[nextStr.length-2]+nextStr[nextStr.length-1]);
-            // console.log(nextStr.length)
-            // console.log(!nextStr.includes(' '))
-        
-            nextStr = nextStr.slice(0, nextStr.lastIndexOf(' '));
-            console.log('nextStr = ' + nextStr);
-            if (nextStr.length === 0 || !nextStr.includes(' '))  {
-                break;
-            }
-        }
-        
-        // убираю начало до последнего пробела, если найден px
-        if (nextStr[nextStr.length-2]+nextStr[nextStr.length-1] === 'px') {
-            nextStr = nextStr.slice(nextStr.lastIndexOf(' ')+1, nextStr.length);
-            console.log(nextStr);
-        }
-        
-        console.log(str.indexOf(nextStr)); // поиск значения в px в изначальной строке
-        
-        let beforePx = nextStr.slice(0, nextStr.indexOf('px'));
-        
-        //убрали px и превратили в число
-        beforePx = Number(beforePx);
-        console.log(beforePx);
-        
-        
-        let rem = 0.0625;
-        let afterRem = rem * beforePx;
-        console.log(afterRem);
-        
-        let finalRem = afterRem + 'rem';
-        console.log(finalRem);
-        
-        str = str.slice(0, str.indexOf(nextStr)) + finalRem + str.slice(str.indexOf(nextStr)+finalRem.length);
-        console.log('final === ', str);
-        
-        element = document.querySelector('.selector');
-        element.innerHTML = str;
-        
-        }
 
 
     
