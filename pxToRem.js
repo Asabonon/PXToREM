@@ -139,6 +139,17 @@ submitBtn.onclick = function () {
         while (outputStr.includes(';;')) {
             outputStr = outputStr.replace(';;', ';');
         }
+        if (outputStr.includes('{;')) {
+            outputStr = outputStr.replace('{;', '{');
+        }
+        if (outputStr.includes('};')) {
+            outputStr = outputStr.replace('};', '}');
+        }
+        if (outputStr.includes('<br/>;')) {
+            outputStr = outputStr.replace('<br/>;', '<br/>');
+        }
+
+
         element2 = document.querySelector('.selector');
         element2.innerHTML = outputStr;
         
