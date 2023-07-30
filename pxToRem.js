@@ -62,25 +62,31 @@ submitBtn.onclick = function () {
         let str1 = str.split('\n');
         console.log(str1)
         
-        str1.forEach(element => converteToREM(element))
+        str1.forEach(element => converteToREM(element)) // каждую строку конвертирую отдельно
+
+
         function converteToREM(str) {
             while (str.includes('px')) {
-                
+                while (str.slice(-1) === ';') {
+                    str = str.slice(0,-1);
+                }
+
+
                 if (!isNaN(str[str.search('px')-1])) {
                     console.log('fine');
                 } else {
                     console.log('error');
                     break;
                 }
-                console.log(str.includes('px'));
-                console.log(str.search('px')); 
+                // console.log(str.includes('px'));
+                // console.log(str.search('px')); 
                 
                 // ' '... = [?]
                 //px = [12] // p = [12], x [] = p [] + 1, x [] = [13]
                 // ...' ' = [12+2]
                 
                 let nextStr = str;
-                console.log('str = ' + nextStr);
+                // console.log('str = ' + nextStr);
                 
                 // убираю с конца до px
                 while (nextStr[nextStr.length-2]+nextStr[nextStr.length-1] !== 'px') {
@@ -90,7 +96,7 @@ submitBtn.onclick = function () {
                     // console.log(!nextStr.includes(' '))
                     
                     nextStr = nextStr.slice(0, nextStr.lastIndexOf(' '));
-                    console.log('nextStr = ' + nextStr);
+                    // console.log('nextStr = ' + nextStr);
                     if (nextStr.length === 0 || !nextStr.includes(' '))  {
                         break;
                     }
@@ -99,38 +105,45 @@ submitBtn.onclick = function () {
                 // убираю начало до последнего пробела, если найден px
                 if (nextStr[nextStr.length-2]+nextStr[nextStr.length-1] === 'px') {
                     nextStr = nextStr.slice(nextStr.lastIndexOf(' ')+1, nextStr.length);
-                    console.log(nextStr);
+                    // console.log(nextStr);
                 }
                 
-                console.log(str.indexOf(nextStr)); // поиск значения в px в изначальной строке
+                // console.log(str.indexOf(nextStr)); // поиск значения в px в изначальной строке
                 
                 let beforePx = nextStr.slice(0, nextStr.indexOf('px'));
                 
                 //убрали px и превратили в число
                 beforePx = Number(beforePx);
-                console.log(beforePx);
+                // console.log(beforePx);
                 
                 
                 let rem = 0.0625;
                 let afterRem = rem * beforePx;
-                console.log(afterRem);
+                // console.log(afterRem);
                 
                 let finalRem = afterRem + 'rem';
-                console.log(finalRem);
+                // console.log(finalRem);
                 
                 str = str.slice(0, str.indexOf(nextStr)) + finalRem + str.slice(str.indexOf(nextStr)+finalRem.length);
                 console.log('final === ', str);
                 
-                // element2 = document.querySelector('.selector');
-                // element2.innerHTML = str;
+                
                 
             }
             return arr.push(str);
         }
+
         
+        // let outputStr = String(arr).replace(',', ';<br/>') // для построчного вывода изменяем массив
+        let outputStr = arr.join(';<br/>')
+        while (outputStr.includes(';;')) {
+            outputStr = outputStr.replace(';;', ';');
+        }
+        element2 = document.querySelector('.selector');
+        element2.innerHTML = outputStr;
         
-        console.log(`All strings: ${str1}  `) //начальное значение
-        console.log(`All strings: ${arr}  `) // 
+        // console.log(`All strings: ${str1}  `) //начальное значение
+        // console.log(`All strings: ${arr}  `) // 
         
         
     }
