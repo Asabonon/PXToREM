@@ -130,24 +130,32 @@ submitBtn.onclick = function () {
                 
                 
             }
+            if (str.includes('rem')) {
+                str += ';'
+            }
+            // str += ';'
             return arr.push(str);
         }
 
         
         // let outputStr = String(arr).replace(',', ';<br/>') // для построчного вывода изменяем массив
-        let outputStr = arr.join(';<br/>')
-        while (outputStr.includes(';;')) {
-            outputStr = outputStr.replace(';;', ';');
-        }
-        if (outputStr.includes('{;')) {
-            outputStr = outputStr.replace('{;', '{');
-        }
-        if (outputStr.includes('};')) {
-            outputStr = outputStr.replace('};', '}');
-        }
-        if (outputStr.includes('<br/>;')) {
-            outputStr = outputStr.replace('<br/>;', '<br/>');
-        }
+        let outputStr = arr.join('<br/>')
+        // while (outputStr.includes(';;')) {
+        //     outputStr = outputStr.replace(';;', ';');
+        // }
+        // while (outputStr.includes('{;')) {
+        //     outputStr = outputStr.replace('{;', '{');
+        // }
+        // if (outputStr.includes('};')) {
+        //     outputStr = outputStr.replace('};', '}');
+        // }
+        // if (outputStr.includes('<br/>;')) {
+        //     outputStr = outputStr.replace('<br/>;', '<br/>');
+        // }
+        // while (outputStr.includes(',;')) {
+        //     outputStr = outputStr.replace(',;', ',');
+        // }
+
 
 
         element2 = document.querySelector('.selector');
