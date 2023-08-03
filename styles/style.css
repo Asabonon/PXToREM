@@ -13,11 +13,15 @@ html,
 body {
     font: 400 16px 'Montserrat', sans-serif;
     color: #ffffff;
-    background-color: #000000;
+    background: linear-gradient(180deg, #484848 0%, #4F4A71 100%);
+    min-height: 112.0625rem;
 }
 
 .content {
-    max-width: 81rem;
+    /* width: 81rem; */
+    width: 120rem;
+    /* height: 112.0625rem; */
+    /* height: auto; */
     margin: 0 auto;
     display: grid;
     grid-template-columns: 40rem, 40rem;
@@ -26,8 +30,8 @@ body {
     "navigation__interactive navigation__menu";
     justify-items: stretch;
     align-items:start;
-    justify-content: space-between;
-    align-content: space-evenly;
+    justify-content: center;
+    align-content: flex-start;
     padding-top: 1.032rem;
     /* background-color: aliceblue; */
 }

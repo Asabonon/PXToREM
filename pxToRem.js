@@ -140,30 +140,9 @@ submitBtn.onclick = function () {
         
         // let outputStr = String(arr).replace(',', ';<br/>') // для построчного вывода изменяем массив
         let outputStr = arr.join('<br/>')
-        // while (outputStr.includes(';;')) {
-        //     outputStr = outputStr.replace(';;', ';');
-        // }
-        // while (outputStr.includes('{;')) {
-        //     outputStr = outputStr.replace('{;', '{');
-        // }
-        // if (outputStr.includes('};')) {
-        //     outputStr = outputStr.replace('};', '}');
-        // }
-        // if (outputStr.includes('<br/>;')) {
-        //     outputStr = outputStr.replace('<br/>;', '<br/>');
-        // }
-        // while (outputStr.includes(',;')) {
-        //     outputStr = outputStr.replace(',;', ',');
-        // }
-
-
 
         element2 = document.querySelector('.selector');
-        element2.innerHTML = outputStr;
-        
-        // console.log(`All strings: ${str1}  `) //начальное значение
-        // console.log(`All strings: ${arr}  `) // 
-        
+        element2.innerHTML = outputStr;     
         
     }
 
